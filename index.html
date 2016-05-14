@@ -17,7 +17,7 @@
         <div id="content_wrapper">
             <div class="channels_in_list" ng-repeat="channel in channels | filter:{list:currentList.name}">
                 <a href="{{channel.url}}" target="_blank">{{channel.title}}</a>
-                <button type="button" class="edit_channel_in_list" ng-click="startEditing()">EDIT</button>
+                <button type="button" class="edit_channel_in_list" ng-click="setEditedChannel(channel);startEditing()">EDIT</button>
             </div>
             <!--creating/adding channel-->
             <div ng-if="shouldShowCreating()">
@@ -35,15 +35,23 @@
                     <button type="button" class="cancel_adding_channel" ng-click="cancelCreating()">Cancel</button>
 
                 </form>
-                <!--<div ng-if="isCreating">
-                    Add a channel
-                    <button type="button" class="cancel_adding_channel" ng-click="cancelCreating()">Cancel</button>
-                </div>-->
             </div>
             <!--Editing a channel-->
             <div ng-if="shouldShowEditing()">
-                Edit a channel
-                <button type="button" class="editing" ng-click="cancelEditing()">Cancel</button>
+                Editing {{editedChannel.title}}
+
+                <form class="edit_form" role="form" ng-submit="updateChannel(editedChannel)" novalidate>
+                    <div class="form_group">
+                        <label>Channel Title</label>
+                        <input type="text" class="form_control" ng-model="editedChannel.title" placeholder="Enter Title" />
+                    </div>
+                    <div class="form_group">
+                        <label>Channel URL</label>
+                        <input type="text" class="form-control" ng-model="editedChannel.url" placeholder="Enter URL" />
+                    </div>
+                    <button type="submit">Save</button>
+                    <button type="button" class="editing" ng-click="cancelEditing()">Cancel</button>
+                </form>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>

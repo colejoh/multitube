@@ -77,7 +77,23 @@ angular.module('multitube', [
     }
 
     $scope.createChannel = createChannel;
+    $scope.editedChannel = null;
 
+    function setEditedChannel(channel) {
+        $scope.editedChannel = angular.copy(channel);
+    }
+
+    function updateChannel(channel) {
+        var index = _.findIndex($scope.channels, function(b){
+            return b.id == channel.id;
+        })
+        $scope.channels[index] = channel;
+        $scope.editedChannel = null;
+        $scope.isEditing = false;
+    }
+
+    $scope.setEditedChannel = setEditedChannel;
+    $scope.updateChannel = updateChannel;
     //====================
     //Creating and Editing
     //====================
