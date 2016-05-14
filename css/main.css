@@ -52,7 +52,35 @@ nav {
     min-height: calc(100vh - 70px);
     color: #21252B;
 }
+#main_feed {
+    float: left;
+    width: calc(100% - 500px);
+}
+#channel_listing_and_actions {
+    float: right;
+    width: 300px;
+    background: #C8C9C9;
+    min-height: calc(100vh - 70px);
+}
 #list_name {
     text-align: center;
     margin: 10px 0px;
+}
+.channels_in_list {
+    padding: 20px;
+}
+.channel_name_wrapper {
+    float: left;
+}
+.edit_button_wrapper {
+    float: right;
+}
+.edit_channel_in_list {
+    border: 1px solid #21252B;
+    border-radius: 4px;
+    font-family: 'Helvetica Neue', sans-serif;
+    -webkit-styling: none;
+    padding: 5px;
+    background: #21252B;
+    color: #fff;
 }
