@@ -22,6 +22,19 @@
             <!--creating/adding channel-->
             <div ng-if="shouldShowCreating()">
                 <button type="button" ng-click="startCreating()">Add Channel</button>
+                <form class="add_form" ng-show="isCreating" role="form" ng-submit="createChannel(newChannel)" novalidate>
+                    <div class="form_group">
+                        <label for="newChannelTitle">Channel Title</label>
+                        <input type="text" class="form_control" id="newChannelTitle" ng-model="newChannel.title" placeholder="Enter Title"/>
+                    </div>
+                    <div class="form_group">
+                        <label for="newChannelURL">Channel URL</label>
+                        <input type="text" class="form_control" id="newChannelURL" ng-model="newChannel.url" placeholder="Enter URL"/>
+                    </div>
+                    <button type="submit">Create</button>
+                    <button type="button" class="cancel_adding_channel" ng-click="cancelCreating()">Cancel</button>
+
+                </form>
                 <!--<div ng-if="isCreating">
                     Add a channel
                     <button type="button" class="cancel_adding_channel" ng-click="cancelCreating()">Cancel</button>

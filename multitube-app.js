@@ -19,14 +19,27 @@ angular.module('multitube', [
 
     $scope.currentList = null;
 
-    //Private function to filter the category based upon what the user selects
+    /**
+    * Set current list assigns the global variable currentList to the current operating
+    * list.
+    * Parameters:
+    *     list: The list to assign
+    * Remarks:
+    *     This function is used to filter the channels when selecting a list
+    **/
     function setCurrentList(list) {
         $scope.currentList = list;
         cancelCreating();
         cancelEditing();
     }
 
-    //Private function to return if the current list is the list passed through
+    /**
+    * Checks if the list passed through is the same is the current operating list
+    * Parameters:
+    *     list object to check
+    * Returns:
+    *     True if the list objects match, false otherwist
+    **/
     function isCurrentList(list) {
         return $scope.currentList !== null && list.name == $scope.currentList.name;
     }
@@ -34,34 +47,89 @@ angular.module('multitube', [
     $scope.setCurrentList = setCurrentList;
     $scope.isCurrentList = isCurrentList;
 
+    //=============================
+    //CRUD (Create, Update, Delete)
+    //=============================
+
+    /**
+    * Resets the create form to default values
+    **/
+    function resetCreateForm() {
+            $scope.newChannel = {
+                title: '',
+                url: '',
+                list: $scope.currentList.name
+            }
+    }
+
+    /**
+    * Adds a channel object to the channel array
+    * Parameters:
+    *     channel: The channel object to add to the array
+    * Remarks:
+    *     The channel.id equal to length isn't a GREAT way to do it. It works
+    *     though
+    **/
+    function createChannel(channel) {
+        channel.id = $scope.channels.length;
+        $scope.channels.push(channel);
+        resetCreateForm();
+    }
+
+    $scope.createChannel = createChannel;
+
     //====================
     //Creating and Editing
     //====================
     $scope.isCreating = false;
     $scope.isEditing = false;
 
+    /**
+    * Assigns the global variables to the proper values to begin adding a channel
+    * The function also resets all values using the resetCreateForm() method
+    **/
     function startCreating() {
         $scope.isCreating = true;
         $scope.isEditing = false;
+        resetCreateForm();
     }
 
+    /**
+    * This function is called when the user wants to cancel creating/adding
+    **/
     function cancelCreating() {
         $scope.isCreating = false;
     }
 
+    /**
+    * Assigns the global variables to the proper values to begin editing a channel
+    **/
     function startEditing() {
         $scope.isCreating = false;
         $scope.isEditing = true;
     }
 
+    /**
+    * This function is called when the user wants to cancel editing
+    **/
     function cancelEditing() {
         $scope.isEditing = false;
     }
 
+    /**
+    * Function called under ng-if to check if it is allowed to show the creating form
+    * Returns:
+    *     True if the current list is set and the user isn't currently editing, false otherwise
+    **/
     function shouldShowCreating() {
         return $scope.currentList && !$scope.isEditing;
     }
 
+    /**
+    * Function called under ng-if to check if it is allowed to show the editing form
+    * Returns:
+    *     True if the user wants to edit and the user currently isn't creating, false otherwise
+    **/
     function shouldShowEditing() {
         return $scope.isEditing && !$scope.isCreating;
     }
