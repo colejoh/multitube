@@ -1,23 +1,39 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="multitube">
     <head>
         <meta charset="utf-8">
         <title>Multitube</title>
         <link rel="stylesheet" href="css/main.css">
     </head>
-    <body>
+    <body ng-controller='MainCtrl'>
         <nav>
-            <div id="site_title">Multitube</div>
+            <div id="site_title"><a href="#" ng-click="setCurrentList(null)">multitube</a></div>
         </nav>
         <div id="sidebar_wrapper">
-            <div id="sidebar_header">Lists</div>
-            <div class="list">Funny</div>
-            <div class="list">Entertainment</div>
-            <div class="list">Education</div>
+            <div id="list_wrapper" ng-repeat="list in lists" ng-class="{'list_active':isCurrentList(list)}">
+                <a href="#" ng-click="setCurrentList(list)"><div class="list">{{list.name}}</div></a>
+            </div>
         </div>
         <div id="content_wrapper">
-            <div id="content_header">Videos</div>
+            <div class="channels_in_list" ng-repeat="channel in channels | filter:{list:currentList.name}">
+                <a href="{{channel.url}}" target="_blank">{{channel.title}}</a>
+                <button type="button" class="edit_channel_in_list" ng-click="startEditing()">EDIT</button>
+            </div>
+            <!--creating/adding channel-->
+            <div ng-if="shouldShowCreating()">
+                <button type="button" ng-click="startCreating()">Add Channel</button>
+                <!--<div ng-if="isCreating">
+                    Add a channel
+                    <button type="button" class="cancel_adding_channel" ng-click="cancelCreating()">Cancel</button>
+                </div>-->
+            </div>
+            <!--Editing a channel-->
+            <div ng-if="shouldShowEditing()">
+                Edit a channel
+                <button type="button" class="editing" ng-click="cancelEditing()">Cancel</button>
+            </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="multitube-app.js"></script>
     </body>
 </html>
