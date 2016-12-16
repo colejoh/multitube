@@ -1,0 +1,82 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+.small-caps {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+nav {
+    min-height: 52px;
+    width: 100%;
+    border-bottom: 1px solid #CFCFCF;
+    line-height: 52px;
+}
+nav .nav {
+    text-align: right;
+}
+.logo {
+    font-weight: bold;
+}
+.sidebar {
+    width: 200px;
+    background: #fff;
+    float: left;
+    min-height: calc(100vh - 52px);
+    padding: 15px;
+}
+.content {
+    background: #F1F0F1;
+    min-height: calc(100vh - 52px);
+    padding: 15px;
+    width: calc(100% - 200px);
+    float: left;
+}
+.multi {
+    padding: 5px;
+}
+.multi:hover {
+    background: #464646;
+    color: #fff;
+    cursor: pointer;
+}
+.multi.selected {
+    background: #D42722;
+    color: #fff;
+}
+.feed {
+    background: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+}
+.video {
+    padding: 15px;
+    border-bottom: 1px solid #E1E1E1;
+}
+.video .channel-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.video .video-thumbnail {
+    width: 200px;
+    float: left;
+}
+.video .info {
+    float: left;
+    padding-left: 5px;
+}
+.video .video-title {
+    font-weight: bold;
+    color: #0079C6;
+}
+.video .video-title:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.video .info-channel-title {
+    font-size: 12px;
+}
+.video .video-desc {
+    font-size: 12px;
+}
